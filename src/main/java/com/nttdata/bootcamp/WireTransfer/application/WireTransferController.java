@@ -4,6 +4,7 @@ import com.nttdata.bootcamp.WireTransfer.domain.dto.WireTransferRequest;
 import com.nttdata.bootcamp.WireTransfer.domain.dto.WireTransferResponse;
 import com.nttdata.bootcamp.WireTransfer.infraestructure.IWireTransferService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("${message.path-wireTransfer}")
 @RefreshScope
+@Slf4j
 public class WireTransferController {
     @Autowired
     private IWireTransferService service;
@@ -21,6 +23,7 @@ public class WireTransferController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<WireTransferResponse> getWireTransfer(@RequestBody WireTransferRequest request) {
+        log.debug("====> WireTransferController: GetWireTransfer");
         return service.wireTransfer(request);
     }
 }

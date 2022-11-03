@@ -28,6 +28,7 @@ public class WireTransferService implements IWireTransferService {
 
     @Override
     public Mono<WireTransferResponse> wireTransfer(WireTransferRequest request) {
+        log.debug("====> WireTransferService: wireTransfer");
         if (request.getSource().equals(request.getTarget())) return Mono.error(RuntimeException::new);
         return customerProductRepository.getById(request.getSource())
                 .zipWith(customerProductRepository.getById(request.getTarget()))
@@ -49,6 +50,7 @@ public class WireTransferService implements IWireTransferService {
     }
 
     private OperationRequest getOperationRequest(WireTransferRequest request, OperationType operationType) {
+        log.debug("====> WireTransferService: GetOperationRequest");
         OperationRequest operationRequest = new OperationRequest();
         operationRequest.setAmount(request.getAmount());
         operationRequest.setOperationType(operationType);
@@ -58,6 +60,7 @@ public class WireTransferService implements IWireTransferService {
     }
 
     public String getDate() {
+        log.debug("====> WireTransferService: GetDate");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class WireTransferMapper implements IWireTransferMapper {
     @Override
     public WireTransferResponse toResponse(WireTransferRequest request) {
+        log.debug("====> WireTransferMapper: ToResponse");
         WireTransferResponse wireTransferResponse = new WireTransferResponse();
         BeanUtils.copyProperties(request, wireTransferResponse);
         return wireTransferResponse;

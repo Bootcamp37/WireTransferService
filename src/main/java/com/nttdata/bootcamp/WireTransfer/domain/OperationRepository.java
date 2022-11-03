@@ -25,6 +25,7 @@ public class OperationRepository {
     ReactiveCircuitBreakerFactory reactiveCircuitBreakerFactory;
 
     public Mono<OperationResponse> postOperation(OperationRequest request) {
+        log.debug("====> OperationRepository: PostOperation");
         WebClient webClientOperation = WebClient.builder().baseUrl(urlOperation).build();
         return webClientOperation.post()
                 .uri(pathPost)
