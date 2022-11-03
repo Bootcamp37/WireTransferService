@@ -16,3 +16,5 @@ message:
   path-customerProductDomain: http://ms-customerproduct:8082
   path-get: /api/v1/customerPassivesProducts/
   path-update: /api/v1/customerPassivesProducts/update/
+  path-operationDomain: http://ms-operation:8083
+  path-post: /api/v1/customerPassivesProducts
