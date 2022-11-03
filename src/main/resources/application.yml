@@ -1,0 +1,18 @@
+server:
+  port: 8087
+spring:
+  application:
+    name: wire-transfer-service
+  config:
+    import:
+      - optional:configserver:http://ms-configserver:8888
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+message:
+  path-wireTransfer: /api/v1/wiretransfer
+  path-customerProductDomain: http://ms-customerproduct:8082
+  path-get: /api/v1/customerPassivesProducts/
+  path-update: /api/v1/customerPassivesProducts/update/
