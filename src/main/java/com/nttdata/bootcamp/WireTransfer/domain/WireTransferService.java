@@ -43,10 +43,7 @@ public class WireTransferService implements IWireTransferService {
                     OperationRequest deposit = getOperationRequest(request, OperationType.DEPOSIT);
                     return operationRepository.postOperation(deposit);
                 })
-                .flatMap(e -> {
-                    return Mono.just(request)
-                            .map(wireTransferMapper::toResponse);
-                });
+                .flatMap(e -> Mono.just(request).map(wireTransferMapper::toResponse));
     }
 
     private OperationRequest getOperationRequest(WireTransferRequest request, OperationType operationType) {

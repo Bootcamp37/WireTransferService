@@ -1,6 +1,5 @@
 package com.nttdata.bootcamp.WireTransfer.domain;
 
-import com.nttdata.bootcamp.WireTransfer.domain.dto.CustomerPassiveProductRequest;
 import com.nttdata.bootcamp.WireTransfer.domain.dto.CustomerPassiveProductResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
