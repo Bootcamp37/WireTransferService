@@ -23,7 +23,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class OperationRepository {
   public static final String OPERATION_SERVICE = "ms-operation";
-  @Value("${message.path-operationDomain")
+  @Value("${message.path-operationDomain}")
   public String urlOperation;
   @Value("${message.path-post}")
   public String pathPost;
