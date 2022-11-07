@@ -5,7 +5,11 @@ spring:
     name: wire-transfer-service
   config:
     import:
-      - optional:configserver:http://ms-configserver:8888
+      - optional:configserver:https://ms-config.azurewebsites.net
+eureka:
+  client:
+    service-url:
+      defaultZone: https://ms-discovery.azurewebsites.net/eureka/
 management:
   endpoint:
     web:
@@ -13,8 +17,8 @@ management:
         include: "*"
 message:
   path-wireTransfer: /api/v1/wiretransfer
-  path-customerProductDomain: http://ms-customerproduct:8082
+  path-customerProductDomain: https://ms-customerproduct.azurewebsites.net
   path-get: /api/v1/customerPassivesProducts/
   path-update: /api/v1/customerPassivesProducts/update/
-  path-operationDomain: http://ms-operation:8083
+  path-operationDomain: https://ms-operation.azurewebsites.net
   path-post: /api/v1/customerPassivesProducts
