@@ -47,9 +47,9 @@ public class CustomerPassiveProductRepository {
           .uri(pathGet + "{id}", id)
           .accept(MediaType.APPLICATION_JSON)
           .retrieve()
-          .bodyToMono(CustomerPassiveProductResponse.class)
+          .bodyToMono(CustomerPassiveProductResponse.class)/*
           .transform(it -> reactiveCircuitBreakerFactory.create(CUSTOMER_PRODUCT_SERVICE)
                 .run(it, throwable -> Mono.just(new CustomerPassiveProductResponse()))
-          );
+          )*/;
   }
 }

@@ -45,8 +45,8 @@ public class OperationRepository {
           .accept(MediaType.APPLICATION_JSON)
           .bodyValue(request)
           .retrieve()
-          .bodyToMono(OperationResponse.class)
+          .bodyToMono(OperationResponse.class)/*
           .transform(it -> reactiveCircuitBreakerFactory.create(OPERATION_SERVICE)
-                .run(it, throwable -> Mono.just(new OperationResponse())));
+                .run(it, throwable -> Mono.just(new OperationResponse())))*/;
   }
 }
