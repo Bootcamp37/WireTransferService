@@ -65,7 +65,8 @@ public class WireTransferService implements IWireTransferService {
               return Mono.error(RuntimeException::new);
             }
             // Leer operacion y restar Amount en la cuenta origen
-            OperationRequest withdrawal = getOperationRequest(request, OperationType.WITHDRAWAL, request.getSource());
+            OperationRequest withdrawal = getOperationRequest(request, OperationType.WITHDRAWAL,
+                  request.getSource());
             return operationRepository.postOperation(withdrawal)
                   .map(f -> {
                     log.info(" 4 ====> " + f.toString());
@@ -74,7 +75,8 @@ public class WireTransferService implements IWireTransferService {
           })
           .flatMap(e -> {
             // Leer operación y agregar Amount en la cuenta destino
-            OperationRequest deposit = getOperationRequest(request, OperationType.DEPOSIT, request.getTarget());
+            OperationRequest deposit = getOperationRequest(request, OperationType.DEPOSIT,
+                  request.getTarget());
             return operationRepository.postOperation(deposit)
                   .map(f -> {
                     log.info(" 5 ====> " + f.toString());
