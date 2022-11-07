@@ -22,3 +22,26 @@ message:
   path-update: /api/v1/customerPassivesProducts/update/
   path-operationDomain: https://ms-operation.azurewebsites.net
   path-post: /api/v1/customerPassivesProducts
+resilience4j:
+  circuitbreaker:
+    instances:
+      ms-customerProduct:
+        register-health-indicator: true
+        event-consumer-buffer-size: 10
+        failure-rate-threshold: 50
+        minimumNumberOfCalls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        waitDurationInOpenState: 2s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+      ms-operation:
+        register-health-indicator: true
+        event-consumer-buffer-size: 10
+        failure-rate-threshold: 50
+        minimumNumberOfCalls: 5
+        automatic-transition-from-open-to-half-open-enabled: true
+        waitDurationInOpenState: 2s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
