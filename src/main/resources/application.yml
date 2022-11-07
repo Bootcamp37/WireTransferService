@@ -21,7 +21,7 @@ message:
   path-get: /api/v1/customerPassivesProducts/
   path-update: /api/v1/customerPassivesProducts/update/
   path-operationDomain: https://ms-operation.azurewebsites.net
-  path-post: /api/v1/customerPassivesProducts
+  path-post: /api/v1/operations
 resilience4j:
   circuitbreaker:
     instances:
