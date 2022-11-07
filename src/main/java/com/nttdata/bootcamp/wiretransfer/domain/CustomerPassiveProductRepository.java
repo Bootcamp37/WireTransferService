@@ -40,7 +40,8 @@ public class CustomerPassiveProductRepository {
    * @return     Retorna Mono < CustomerPassiveProductResponse >
    */
   public Mono<CustomerPassiveProductResponse> getById(String id) {
-    log.debug("====> CustomerPassiveProductRepository: GetById");
+    log.info("====> CustomerPassiveProductRepository: GetById");
+    log.info("====> Call : " + urlCustomerProduct + pathGet + id);
     WebClient webClientProduct = WebClient.builder().baseUrl(urlCustomerProduct).build();
     return webClientProduct.get()
           .uri(pathGet + "{id}", id)

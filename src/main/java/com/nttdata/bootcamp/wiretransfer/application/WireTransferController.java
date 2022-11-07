@@ -42,7 +42,7 @@ public class WireTransferController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Mono<WireTransferResponse> getWireTransfer(@RequestBody WireTransferRequest request) {
-    log.debug("====> WireTransferController: GetWireTransfer");
+    log.info("====> WireTransferController: GetWireTransfer");
     return service.wireTransfer(request);
   }
 }

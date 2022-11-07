@@ -40,24 +40,46 @@ public class WireTransferService implements IWireTransferService {
    */
   @Override
   public Mono<WireTransferResponse> wireTransfer(WireTransferRequest request) {
-    log.debug("====> WireTransferService: wireTransfer");
+    log.info("====> WireTransferService: wireTransfer");
     if (request.getSource().equals(request.getTarget())) {
+      log.info("====> WireTransferService: Transferencia a la misma cuenta");
       return Mono.error(RuntimeException::new);
     }
     return customerProductRepository.getById(request.getSource())
+          .map(
+                e -> {
+                  log.info(" 1 ====> " + e.toString());
+                  return e;
+                }
+          )
           .zipWith(customerProductRepository.getById(request.getTarget()))
+          .map(
+                e -> {
+                  log.info(" 2 ====> " + e.getT1().toString());
+                  log.info(" 3 ====> " + e.getT2().toString());
+                  return e;
+                }
+          )
           .flatMap(e -> {
-            if (e.getT2().getAmount() < request.getAmount()) {
+            if (e.getT1().getAmount() < request.getAmount()) {
               return Mono.error(RuntimeException::new);
             }
             // Leer operacion y restar Amount en la cuenta origen
             OperationRequest withdrawal = getOperationRequest(request, OperationType.WITHDRAWAL);
-            return operationRepository.postOperation(withdrawal);
+            return operationRepository.postOperation(withdrawal)
+                  .map(f -> {
+                    log.info(" 4 ====> " + f.toString());
+                    return f;
+                  });
           })
           .flatMap(e -> {
             // Leer operación y agregar Amount en la cuenta destino
             OperationRequest deposit = getOperationRequest(request, OperationType.DEPOSIT);
-            return operationRepository.postOperation(deposit);
+            return operationRepository.postOperation(deposit)
+                  .map(f -> {
+                    log.info(" 5 ====> " + f.toString());
+                    return f;
+                  });
           })
           .flatMap(e -> Mono.just(request).map(wireTransferMapper::toResponse));
   }
@@ -71,7 +93,7 @@ public class WireTransferService implements IWireTransferService {
    */
   private OperationRequest getOperationRequest(WireTransferRequest request,
                                                OperationType operationType) {
-    log.debug("====> WireTransferService: GetOperationRequest");
+    log.info("====> WireTransferService: GetOperationRequest");
     OperationRequest operationRequest = new OperationRequest();
     operationRequest.setAmount(request.getAmount());
     operationRequest.setOperationType(operationType);
@@ -86,7 +108,7 @@ public class WireTransferService implements IWireTransferService {
    * @return    Retorna un String.
    */
   public String getDate() {
-    log.debug("====> WireTransferService: GetDate");
+    log.info("====> WireTransferService: GetDate");
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
     LocalDateTime now = LocalDateTime.now();
     return dtf.format(now);

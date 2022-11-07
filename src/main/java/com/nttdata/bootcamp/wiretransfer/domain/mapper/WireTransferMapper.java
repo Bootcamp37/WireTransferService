@@ -25,7 +25,7 @@ public class WireTransferMapper implements IWireTransferMapper {
    */
   @Override
   public WireTransferResponse toResponse(WireTransferRequest request) {
-    log.debug("====> WireTransferMapper: ToResponse");
+    log.info("====> WireTransferMapper: ToResponse");
     WireTransferResponse wireTransferResponse = new WireTransferResponse();
     BeanUtils.copyProperties(request, wireTransferResponse);
     return wireTransferResponse;

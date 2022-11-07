@@ -37,7 +37,8 @@ public class OperationRepository {
    * @return          Retorna Mono < OperationResponse >
    */
   public Mono<OperationResponse> postOperation(OperationRequest request) {
-    log.debug("====> OperationRepository: PostOperation");
+    log.info("====> OperationRepository: PostOperation");
+    log.info("====> Call : " + urlOperation + pathPost);
     WebClient webClientOperation = WebClient.builder().baseUrl(urlOperation).build();
     return webClientOperation.post()
           .uri(pathPost)
